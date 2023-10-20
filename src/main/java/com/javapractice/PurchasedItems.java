@@ -4,22 +4,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 class PurchasedItem {
-    private ArrayList<Double> costValues = new ArrayList<>();
-    private ArrayList<Double> vatValues = new ArrayList<>();
+
     private ArrayList<Double> priceValues = new ArrayList<>();
     private double totalCost=0;
 
-    public void setItems(double costPrice, double vatRate, int quantity){
-        costValues.add(costPrice);
-        vatValues.add(vatRate);
-
+    public void addItem(double costPrice, int vatRate, int quantity){
         double vatValue = costPrice*((vatRate/100)+1);
         System.out.printf("Price per item %.2f %n",costPrice+vatValue);
         double finalPrice=(costPrice+vatValue)*quantity;
         priceValues.add(finalPrice);
         //quantityValues.add(quantity);
         totalCost+=finalPrice;
-        System.out.printf("the total cost is: £%.2f%n",totalCost);
+    }
+
+    public double getTotalCost(){
+        return totalCost;
     }
 
     public void printList(){
@@ -32,7 +31,6 @@ class PurchasedItem {
 
     public void sortList(){
         Collections.sort(priceValues);
-        Collections.sort(vatValues);
-        Collections.sort(costValues);
+
     }
 }

@@ -6,22 +6,20 @@ public class Main {
         boolean continueCalculations = true;
 
         PurchasedItem item = new PurchasedItem();
-        Prompt costPrompt= new doublePrompt();
-        Prompt vatPrompt = new doublePrompt();
-        Prompt quantityPrompt = new intPrompt();
-        Prompt exitPrompt = new stringPrompt();
-
+        VAT vat = new VAT();
+        Cost cost = new Cost();
+        Quantity quantity = new Quantity();
+        Exit input = new Exit();
 
         while (continueCalculations) {
-            double cost = (double) costPrompt.getValue("Enter the cost: ");
-            double vat = (double) vatPrompt.getValue("Enter the vat: ");
-            int quantity = (int) quantityPrompt.getValue("Enter the quantity: ");
+            vat.input();
+            cost.input();
+            quantity.input();
 
-            item.setItems(cost,vat,quantity);
+            item.addItem(cost.getCostPrice(),vat.getVatRate(),quantity.getQuantity());
 
-            String input = (String) exitPrompt.getValue("Enter the quit to exit or any other key to continue: ");
-
-            if (input.equalsIgnoreCase("QUIT")) {
+            input.input();
+            if ((input.getMessage()).equalsIgnoreCase("QUIT")) {
                 continueCalculations = false;
             }
         }
